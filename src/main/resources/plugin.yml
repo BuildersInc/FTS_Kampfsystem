@@ -1,0 +1,7 @@
+name: Battlesystem
+version: '${project.version}'
+main: de.fts.battlesystem.Battlesystem
+api-version: 1.19
+
+commands:
+  debug:
