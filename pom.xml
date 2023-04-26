@@ -62,8 +62,8 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/BuildersInc/GuiToolbox</url>
+            <id>skullcreator-repo</id>
+            <url>https://github.com/deanveloper/SkullCreator/raw/mvn-repo/</url>
         </repository>
     </repositories>
 
@@ -71,14 +71,18 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
-            <groupId>de.buildersinc</groupId>
-            <artifactId>guitoolbox</artifactId>
-            <version>1.0.0</version>
+            <groupId>dev.dbassett</groupId>
+            <artifactId>skullcreator</artifactId>
+            <version>3.0.1</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>de.buildersinc</groupId>-->
+<!--            <artifactId>guitoolbox</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
     </dependencies>
 </project>

@@ -1,20 +1,15 @@
 package de.fts.battlesystem;
 
-import de.buildersinc.guitoolbox.main.GuiBuilder;
-import de.buildersinc.guitoolbox.toolBox.GuiToolbox;
 import de.fts.battlesystem.cmd.Debug;
-import de.fts.battlesystem.handler.GuiHandler;
-import org.bukkit.Material;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Battlesystem extends JavaPlugin {
+    private static Battlesystem plugin;
 
-    private GuiBuilder guiBuilder;
     @Override
     public void onEnable() {
+        plugin = this;
         // Plugin startup logic
-        this.guiBuilder = new GuiBuilder(this, new GuiHandler());
         new Debug(this);
     }
 
@@ -23,7 +18,7 @@ public final class Battlesystem extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public GuiToolbox getGuiToolbox() {
-        return guiBuilder.getGuiToolbox();
+    public static Battlesystem getPlugin() {
+        return plugin;
     }
 }

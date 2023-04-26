@@ -1,0 +1,24 @@
+Human:
+  Melee: 10
+  Range: 17
+  Agility: 6
+  Magic: 0
+  HeartPoints: 7
+Elv:
+  Melee: 2
+  Range: 13
+  Agility: 9
+  Magic: 15
+  HeartPoints: 1
+Dwarf:
+  Melee: 10
+  Range: 3
+  Agility: 5
+  Magic: 10
+  HeartPoints: 12
+Orc:
+  Melee: 19
+  Range: 2
+  Agility: 1
+  Magic: 3
+  HeartPoints: 15

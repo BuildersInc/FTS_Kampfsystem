@@ -1,6 +1,7 @@
 package de.fts.battlesystem.cmd;
 
 import de.fts.battlesystem.Battlesystem;
+import de.fts.battlesystem.gui.Gui;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +25,7 @@ public class Debug implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
 
-        player.openInventory(plugin.getGuiToolbox().createChestGui(3, "Hallo", "Hallo", Material.GLASS_PANE, false, false));
+        player.openInventory(Gui.createChestGui(3, "Hallo", "Hallo", Material.GLASS_PANE, false, false));
         return true;
     }
 }
