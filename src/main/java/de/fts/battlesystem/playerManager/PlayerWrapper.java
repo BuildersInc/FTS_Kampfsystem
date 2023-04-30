@@ -4,56 +4,67 @@ import de.fts.battlesystem.enums.Race;
 import de.fts.battlesystem.index.StatsIndex;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 
 public class PlayerWrapper {
     private Player player;
     private Race race;
-    private final int[] stats;
+    private final HashMap<String, Integer> stats;
 
     public PlayerWrapper(Player player, Race race) {
         this.player = player;
         this.race = race;
-        this.stats = new int[4];
+
+        this.stats = new HashMap<>();
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+    public Race getRace() {
+        return race;
+    }
+
+    public int getRangePoints() {
+        return stats.get("range");
+    }
+    public void setRangePoints(int value) {
+        stats.put("range", value);
+    }
     public int getHeartPoints() {
-        return getStat(StatsIndex.HEART_POINTS.ordinal());
+        return stats.get("hp");
     }
 
     public void setHeartPoints(int value) {
-        setStat(StatsIndex.HEART_POINTS.ordinal(), value);
+        stats.put("hp", value);
     }
 
     public int getMeleePoints() {
-        return getStat(StatsIndex.MELEE.ordinal());
+        return stats.get("melee");
     }
 
     public void setMeleePoints(int value) {
-        setStat(StatsIndex.MELEE.ordinal(), value);
+        stats.put("melee", value);
+
     }
 
     public int getAgilityPoints() {
-        return getStat(StatsIndex.AGILITY.ordinal());
+        return stats.get("agility");
+
     }
 
     public void setAgilityPoints(int value) {
-        setStat(StatsIndex.AGILITY.ordinal(), value);
+        stats.put("agility", value);
+
     }
 
     public int getMagicPoints() {
-        return getStat(StatsIndex.MAGIC.ordinal());
+        return stats.get("magic");
     }
 
     public void setMagicPoints(int value) {
-        setStat(StatsIndex.MAGIC.ordinal(), value);
+        stats.put("magic", value);
     }
-
-    private int getStat(int statIndex) {
-        return stats[statIndex];
-    }
-
-    private void setStat(int statIndex, int value) {
-        this.stats[statIndex] = value;
-    }
-
+    
 }
