@@ -30,29 +30,48 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-    public void closeConnection() {
+
+    public void savePlayerToDatabase(PlayerWrapper player) {
         try {
-            this.dataBaseConnection.close();
+            String selectSql = "SELECT * FROM players WHERE UUID = ?";
+            PreparedStatement selectStmt = this.dataBaseConnection.prepareStatement(selectSql);
+            selectStmt.setString(1, player.getPlayer().getUniqueId().toString());
+            ResultSet resultSet = selectStmt.executeQuery();
+            PreparedStatement stmt;
+            if (resultSet.next()) {
+                String sql = "UPDATE players \n" +
+                        "SET RACE = ?, statMelee = ?, statRange = ?, statAgility = ?, statMagic = ?, statHP = ? \n" +
+                        "WHERE UUID = ?;";
+                stmt = this.dataBaseConnection.prepareStatement(sql);
+                stmt.setString(1, player.getRace().name());
+                stmt.setInt(2, player.getMeleePoints());
+                stmt.setInt(3, player.getRangePoints());
+                stmt.setInt(4, player.getAgilityPoints());
+                stmt.setInt(5, player.getMagicPoints());
+                stmt.setInt(6, player.getHeartPoints());
+                stmt.setString(7, player.getPlayer().getUniqueId().toString());
+            } else {
+                String sql = "INSERT INTO players (UUID, RACE, statMelee, statRange, statAgility, statMagic, statHP) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                stmt = this.dataBaseConnection.prepareStatement(sql);;
+                stmt.setString(1, player.getPlayer().getUniqueId().toString());
+                stmt.setString(2, player.getRace().name());
+                stmt.setInt(3, player.getMeleePoints());
+                stmt.setInt(4, player.getRangePoints());
+                stmt.setInt(5, player.getAgilityPoints());
+                stmt.setInt(6, player.getMagicPoints());
+                stmt.setInt(7, player.getHeartPoints());
+
+            }
+            int rowsInserted = stmt.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void savePlayerToDatabase(PlayerWrapper player) {
-        String sql = "INSERT INTO players (UUID, RACE, statMelee, statRange, statAgility, statMagic, statHP) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = null;
-        try {
-            stmt = this.dataBaseConnection.prepareStatement(sql);
-            stmt.setString(1, player.getPlayer().getUniqueId().toString());
-            stmt.setString(2, player.getRace().name());
-            stmt.setInt(3, player.getMeleePoints());
-            stmt.setInt(4, player.getRangePoints());
-            stmt.setInt(5, player.getAgilityPoints());
-            stmt.setInt(6, player.getMagicPoints());
-            stmt.setInt(7, player.getHeartPoints());
 
-            // Execute the prepared statement to insert the data
-            int rowsInserted = stmt.executeUpdate();
-            System.out.println("Speichern : " + rowsInserted);
+    public void closeConnection() {
+        try {
+            this.dataBaseConnection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
